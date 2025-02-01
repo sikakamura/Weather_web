@@ -14,22 +14,22 @@
     <div class="card">
         <div class="search">
             <input type="text" placeholder="Enter city name" spellcheck="false">
-            <button><img src="searcg.jpg" alt="Search"></button>
+            <button><img src="img/searcg.jpg" alt="Search"></button>
         </div>
         <div class="weather">
-            <img src="Rain_Animated_Icon___Free_weather_Animated_Icon-removebg-preview.png" class="weather-icon">
+            <img src="img/Rain_Animated_Icon___Free_weather_Animated_Icon-removebg-preview.png" class="weather-icon">
             <h1 class="temp"></h1>
             <h2 class="city">Welcome To Our Weather App</h2>
             <div class="detail">
                 <div class="col">
-                    <img src="humi-removebg-preview.png" alt="Humidity">
+                    <img src="img/humi-removebg-preview.png" alt="Humidity">
                     <div class="text-wea">
                         <p class="humidity"></p>
                         <p>Humidity</p>
                     </div>
                 </div>
                 <div class="col">
-                    <img src="wind-removebg-preview.png" alt="Wind Speed">
+                    <img src="img/wind-removebg-preview.png" alt="Wind Speed">
                     <div class="text-wea">
                         <p class="wind"></p>
                         <p>Wind Speed</p>
@@ -38,53 +38,7 @@
             </div>
         </div>
     </div>
-    <script>
-        const apiKey = " Replace with a valid API key"; 
-        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
-        const searchBox = document.querySelector(".search input");
-        const searchBtn = document.querySelector(".search button");
-        const weatherIcon = document.querySelector(".weather-icon");
-
-        async function checkWeather(city) {
-            try {
-                const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                const data = await response.json();
-                console.log(data);
-
-                document.querySelector(".city").innerHTML = data.name;
-                document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
-                document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
-                document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
-
-                // Set weather icon based on weather condition
-                if (data.weather[0].main == "Clouds") {
-                    weatherIcon.src = "./cloud.png";
-                } else if (data.weather[0].main == "Clear") {
-                    weatherIcon.src = "./clear.png";
-                } else if (data.weather[0].main == "Rain") {
-                    weatherIcon.src = "./Rain_Animated_Icon___Free_weather_Animated_Icon-removebg-preview.png";
-                } else if (data.weather[0].main == "Drizzle") {
-                    weatherIcon.src = "./drizzle.png";
-                } else if (data.weather[0].main == "Mist") {
-                    weatherIcon.src = "./mist.png";
-                }
-            } catch (error) {
-                console.error("Error fetching weather data:", error);
-                alert("Unable to fetch weather data. Please check your internet connection or try again later.");
-            }
-        }
-
-        searchBtn.addEventListener("click", () => {
-            const city = searchBox.value.trim();
-            if (city) {
-                checkWeather(city);
-            } else {
-                alert("Please enter a city name.");
-            }
-        });
+    <script src="func.js" >
     </script>
 </body>
 </html>
